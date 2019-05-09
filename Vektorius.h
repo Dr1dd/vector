@@ -5,7 +5,7 @@
 
 
 template <class T>
-class Vector {
+class Vector{
 private:
  int sz, capacity;
  T* elem;
@@ -45,6 +45,8 @@ void pop_back();
 void reserve(int kiek);
 long int max_size();
 void shrink_to_fit();
+void assign(int kiek, const T &value);
+void clear();
 
 friend class Iterator<T>;
 typedef class Iterator<T> iterator;
@@ -54,5 +56,6 @@ Iterator<T> erase(Iterator<T> pos);
 Iterator<T> erase(Iterator<T> first, Iterator<T> last);
 Iterator<T> insert(Iterator<T> pos, const T & value);
 void insert(iterator pos, int count, const T & value);
-     };
+};
+		
 #endif
