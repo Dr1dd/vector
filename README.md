@@ -39,3 +39,18 @@ Grąžinama pakeisto konteinerio `last` reikšmė (jei pvz. indeksas buvo 5 tai 
 ![reserve](https://imgur.com/xZC7IBb.png)
 
 Atminties rezervacijos funkcija su parametru `kiek`. Ši funkcija padidina konteinerio talpą ir išskiria daugiau atminties. Iš pradžių tikrinama ar `kiek` skaičius yra ne didesnis nei `max_size()` skaičius, kurį gavau pasinaudojęs `std::vector` `max_size` gauta reikšme. Jeigu dydis `kiek` yra didesnis nei `cap` - talpa, tai talpai `cap` priskiriama `kiek` reikšmė ir išskiriama naujam sąrašui `kiek` dinaminės atminties vietos. Po to visi elementai iš `elem` perkopijuojami į `temp` ir pats `elem` yra ištrinamas - elem priskiriamas temp sąrašas.
+
+
+## 2. Spartos analizė:
+
+![main](https://imgur.com/ciX1Ff9.png)
+
+| Elementų skaičius: | std::vector konteinerio vidutinis laikas: | Mano Vector konteinerio vidutinis laikas: |
+| ----- | ---- | --- |
+| 10000 | 0s | 0s |
+| 100000 | 0s | 0s |
+| 1000000 | 0s | 0s |
+| 10000000 | 0.0937279s | 0.0937279s |
+| 100000000 | 0.74462s | 0.57277s |
+
+[testai](https://imgur.com/a/gdD4NqI)
