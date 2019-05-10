@@ -54,3 +54,17 @@ Atminties rezervacijos funkcija su parametru `kiek`. Ši funkcija padidina konte
 | 100000000 | 0.74462s | 0.57277s |
 
 [testai](https://imgur.com/a/gdD4NqI)
+
+
+## 3. konteinerių atminties persiskirstymai:
+
+![capacity](https://imgur.com/LWTVd3f.png)
+
+
+Kaip matome skiriasi 26 ir 27. Taip yra dėl to, nes mano Vector klasės konstruktorius inicializuojant objektui jam priskiria `size` ir `capacity` = 1 
+
+![pvz](https://imgur.com/68DQpgI.png)
+
+push_back funkcija: 
+
+![push_back](https://imgur.com/HtqGA0p.png)
