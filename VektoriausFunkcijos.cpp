@@ -15,7 +15,7 @@ Vector<T>& Vector<T>::operator=(const Vector& v) {
  delete[] elem; 
  elem = p;
  sz = v.sz;
- capacity = v.capacity;
+ cap = v.cap;
  return *this;
 }
 
@@ -25,14 +25,43 @@ Vector<T>& Vector<T>::operator=(Vector&& v) {
  return *this;
  delete[] elem;
  elem = v.elem;
- capacity = v.capacity;
+ cap = v.cap;
  sz = v.sz;
  v.elem = nullptr;
  v.sz = 0;
- v.capacity = 0;
+ v.cap = 0;
  return *this;
  }
- 
+/*template<class T>
+bool Vector<T>::operator==(const Vector<T> & a) const {
+    return pointer == iter.pointer;
+}
+
+template<class T>
+bool Vector<T>::operator!=(const Vector<T> & a) const {
+    return !(pointer == iter.pointer);
+}
+
+template<class T>
+bool Vector<T>::operator<(const Vector<T> & a) const{
+    return pointer < iter.pointer;
+}
+
+template<class T>
+bool Vector<T>::operator<=(const Vector<T> & a) const{
+    return pointer <= iter.pointer;
+}
+
+template<class T>
+bool Vector<T>::operator>(const Vector<T> &a) const {
+    return pointer > iter.pointer;
+}
+
+template<class T>
+bool Vector<T>::operator>=(const Vector<T> &a) const {
+    return pointer >= iter.pointer;
+}
+ */
 template <class T>
 bool Vector<T>::empty() const {
     return (sz == 0);
@@ -56,6 +85,27 @@ Iterator<T> Vector<T>::begin(){
     Iterator<T> temp(elem);
     return temp;
 }
+template<class T>
+Iterator<T> Vector<T>::end() const{
+     Iterator<T> temp(elem + sz);
+    return temp;
+}
+
+template<class T>
+Iterator<T> Vector<T>::begin() const{
+    Iterator<T> temp(elem);
+    return temp;
+}
+template<class T>
+Iterator<T> Vector<T>::rbegin() const{
+    Iterator<T> temp(elem+sz-1);
+    return temp;
+}
+template<class T>
+Iterator<T> Vector<T>::rend() const{
+    Iterator<T> temp(elem-1);
+    return temp;
+}
 
 template<class T>
 void Vector<T>::resize(int kiek) {
@@ -63,7 +113,7 @@ void Vector<T>::resize(int kiek) {
         throw std::exception();
     else if (kiek < sz)
         sz = kiek;
-    else if (kiek > capacity) {
+    else if (kiek > cap) {
         T *tempElem = new T[kiek];
         for (int i = 0; i < sz; i++)
             tempElem[i] = elem[i];
@@ -106,9 +156,9 @@ T &Vector<T>::back() {
 
 template<class T>
 void Vector<T>::push_back(T v) {
-    if (sz == capacity) {
-        capacity *= 2 ;
-        T *temp = new T[capacity];
+    if (sz == cap) {
+        cap *= 2 ;
+        T *temp = new T[cap];
         for (int i = 0; i < sz; i++)
             temp[i] = elem[i];
 
@@ -123,15 +173,14 @@ void Vector<T>::push_back(T v) {
 }
 template<class T>
 void Vector<T>::pop_back() {
-    if (sz > 0)
-        sz--;
+    if (sz > 0)	sz--;
 }
 template<class T>
 void Vector<T>::reserve(int kiek){
 	if(kiek > 9223372036854775807)
 		throw std::exception();
 		
-	if(kiek > capacity) capacity = kiek;
+	if(kiek > cap) cap = kiek;
 }
 template<class T>
 long int Vector<T>::max_size(){
@@ -165,7 +214,7 @@ template<class T>
 Iterator<T> Vector<T>::insert(Iterator<T> pos, const T & value){
     int i = 0;
 
-    if (capacity > sz){
+    if (cap > sz){
         for(Iterator<T> it = elem + sz; it != pos; it--, i++)
             elem[sz - i] = elem[sz - i - 1];
         *pos = value;
@@ -181,7 +230,7 @@ Iterator<T> Vector<T>::insert(Iterator<T> pos, const T & value){
         delete [] elem;
         elem = temp;
         sz++;
-        capacity = sz;
+        cap = sz;
     }
 }
 
@@ -200,26 +249,26 @@ void Vector<T>::insert(Iterator<T> pos, int count, const T & value){
         temp[i+j] = elem[i];
 
     sz += count;
-    capacity = sz;
+    cap = sz;
     delete [] elem;
     elem = temp;
 }
 template<class T>
 void Vector<T>::shrink_to_fit(){
-	capacity = sz;
+	cap = sz;
 }
 template<class T>
 void Vector<T>::assign(int kiek, const T &value) {
     if (kiek < 0)
         throw std::exception();
 
-    if (kiek < capacity)
+    if (kiek < cap)
         for (int i = 0; i < kiek; i++)
             elem[i] = value;
-    else if (kiek >= capacity) {
+    else if (kiek >= cap) {
         delete[] elem;
         elem = new T[kiek + 5];
-        capacity = kiek + 5;
+        cap = kiek + 5;
         sz = kiek;
         for (int i = 0; i < kiek; i++)
             elem[i] = value;
@@ -234,10 +283,23 @@ void Vector<T>::clear(){
        }
 
 }
+
+template<class T>
+const T Vector<T>::at(int pos) const{
+   if(!(pos<sz)) 
+		throw std::out_of_range("out of range");
+  else return *(elem+pos);
+}
+
 int main(){
 	std::vector<double> a{1,2,3};
 	Vector<double>b{1,2,3};
-	std::cout << *b.begin() << std::endl;
+	Vector<double>c{1,2,3};
+	//std::cout << b.at(2) << std::endl;
+	//b.pop_back();
+//	std::cout << b.at(1) << std::endl;
+	auto d = std::distance(a.begin(), a.end());
+	std::cout <<d;
 	
 }
 
