@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <stdexcept>
 #include <vector>
+#include <memory>
+#include <chrono>
 #include "Vektorius.h"
 
 
@@ -177,14 +179,21 @@ void Vector<T>::pop_back() {
 }
 template<class T>
 void Vector<T>::reserve(int kiek){
-	if(kiek > 9223372036854775807)
+	if(kiek > 2305843009213693951)
 		throw std::exception();
-		
-	if(kiek > cap) cap = kiek;
+	if(kiek > cap){
+		cap = kiek;
+	T *temp = new T[cap];
+        for (int i = 0; i < sz; i++)
+            temp[i] = elem[i];
+            
+        delete[] elem;
+        elem = temp;
+	} 
 }
 template<class T>
 long int Vector<T>::max_size(){
-	return 9223372036854775807;
+	return 2305843009213693951;
 }
 
 template<class T>
@@ -292,14 +301,25 @@ const T Vector<T>::at(int pos) const{
 }
 
 int main(){
-	std::vector<double> a{1,2,3};
-	Vector<double>b{1,2,3};
-	Vector<double>c{1,2,3};
-	//std::cout << b.at(2) << std::endl;
-	//b.pop_back();
-//	std::cout << b.at(1) << std::endl;
-	auto d = std::distance(a.begin(), a.end());
-	std::cout <<d;
-	
+
+
+unsigned int sz = 100000000;  
+std::vector<int> v1;
+
+int one = 0;
+int two = 0;
+for (int i = 1; i <= sz; ++i){
+		v1.push_back(i);
+		if(v1.size() == v1.capacity()) one++;
+}
+
+Vector<int> v2;
+for (int i = 1; i <= sz; ++i){
+		v2.push_back(i);
+		if(v2.size() == v2.capacity()) two++;
+}
+std::cout << "std::vector v1 konteineryje persiskirstymu: " << one << " " << v1.capacity() << std::endl;
+std::cout << "Vector v2 konteineryje persiskirstymu: " << two << " " << v2.capacity() << std::endl;
+
 }
 

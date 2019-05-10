@@ -10,7 +10,7 @@ private:
  int sz, cap;
  T* elem;
 public:
-	Vector() : sz(0), cap(0), elem(new T[sz]) {}  // default konstruktorius
+	Vector() : sz(1), cap(1), elem(new T[sz]) {}  // default konstruktorius
 	Vector(int s) : sz{ s }, cap{ s }, elem{ new T[sz] } { std::fill_n(elem, s, 0.0); }                            
 	Vector(int s, T val);
 	~Vector() { delete[] elem; } 
