@@ -34,11 +34,13 @@ Iterator funkcija, kurios parametrai yra 2 iteratoriai, kurie nurodo konteinerio
 Grąžinama pakeisto konteinerio `last` reikšmė (jei pvz. indeksas buvo 5 tai bus grąžinama naują reikšmė su indeksu 5).
 
 
-**reserve:**
+**back:**
 
-![reserve](https://imgur.com/xZC7IBb.png)
+![back](https://imgur.com/DVdfvLG.png)
 
-Atminties rezervacijos funkcija su parametru `kiek`. Ši funkcija padidina konteinerio talpą ir išskiria daugiau atminties. Iš pradžių tikrinama ar `kiek` skaičius yra ne didesnis nei `max_size()` skaičius, kurį gavau pasinaudojęs `std::vector` `max_size` gauta reikšme. Jeigu dydis `kiek` yra didesnis nei `cap` - talpa, tai talpai `cap` priskiriama `kiek` reikšmė ir išskiriama naujam sąrašui `kiek` dinaminės atminties vietos. Po to visi elementai iš `elem` perkopijuojami į `temp` ir pats `elem` yra ištrinamas - elem priskiriamas temp sąrašas.
+Grąžina `reference` į paskutinį elementą vektoriuje. End funkcija skiriasi tuo, kad grąžina iteratorių viena vieta už šio elemento.
+Jeigu vektoriaus dydis yra 0 - išmetamas `exception'as`.
+
 
 
 ## 2. Spartos analizė:
@@ -67,4 +69,4 @@ Kaip matome skiriasi 26 ir 27. Taip yra dėl to, nes mano Vector klasės konstru
 
 push_back funkcija: 
 
-![push_back](https://imgur.com/HtqGA0p.png)
+![push_back](https://imgur.com/aEfnEkp.png)
