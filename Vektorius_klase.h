@@ -32,6 +32,10 @@ Vector& operator=(Vector&& v); // move assign
   
   bool operator==(const Vector<T> & v) const;
     bool operator!=(const Vector<T> & v) const;
+  bool operator<(const Vector<T> & v) const;
+    bool operator<=(const Vector<T> & v) const;
+  bool operator>(const Vector<T> & v) const;
+    bool operator>=(const Vector<T> & v) const;
   
   
 int size() const { return sz; } 
@@ -127,8 +131,8 @@ Vector<T>& Vector<T>::operator=(Vector&& v) {
  }
 template<class T>
 bool Vector<T>::operator==(const Vector<T> &v) const {
-    if (size == v.size && capacity == v.capacity) {
-        for (int i = 0; i < size; i++)
+    if (sz == v.sz && cap == v.cap) {
+        for (int i = 0; i < sz; i++)
             if (elem[i] != v.elem[i])
                 return false;
         return true;
@@ -140,6 +144,54 @@ bool Vector<T>::operator==(const Vector<T> &v) const {
 template<class T>
 bool Vector<T>::operator!=(const Vector<T> &v) const {
     return !operator==(v);
+}
+
+template<class T>
+bool Vector<T>::operator<(const Vector<T> &v) const {
+    if(sz < v.sz && cap < v.cap){
+    	for (int i = 0; i < sz; i++)
+            if (elem[i] < v.elem[i])
+                return false;
+        return true;
+	}
+	return false;
+
+}
+
+template<class T>
+bool Vector<T>::operator<=(const Vector<T> &v) const {
+    if(sz <= v.sz && cap <= v.cap){
+    	for (int i = 0; i < sz; i++)
+            if (elem[i] <= v.elem[i])
+                return false;
+        return true;
+	}
+	return false;
+
+}
+
+template<class T>
+bool Vector<T>::operator>(const Vector<T> &v) const {
+    if(sz > v.sz && cap > v.cap){
+    	for (int i = 0; i < sz; i++)
+            if (elem[i] > v.elem[i])
+                return false;
+        return true;
+	}
+	return false;
+
+}
+
+template<class T>
+bool Vector<T>::operator>=(const Vector<T> &v) const {
+    if(sz >= v.sz && cap >= v.cap){
+    	for (int i = 0; i < sz; i++)
+            if (elem[i] >= v.elem[i])
+                return false;
+        return true;
+	}
+	return false;
+
 }
  
 template <class T>
