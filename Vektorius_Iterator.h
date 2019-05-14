@@ -1,8 +1,9 @@
 #ifndef VECTOR_ITERATOR_H
 #define VECTOR_ITERATOR_H
 
+#include <iterator>
 template<class T>
-class Iterator {
+class Iterator : public std::iterator<std::random_access_iterator_tag, T> {
 private:
     T * pointer;
 public:
@@ -14,6 +15,7 @@ public:
 
     Iterator operator+(int add);
     Iterator operator-(int sub);
+    ptrdiff_t operator-(const Iterator &it) { return pointer - it.pointer; }
 
     bool operator!=(const Iterator<T> & iter) const;
     bool operator==(const Iterator<T> & iter) const;
@@ -29,6 +31,8 @@ public:
 
     T & operator[](int n);
     T & operator*();
+    
+
 };
 
 template<class T>
@@ -71,7 +75,6 @@ Iterator<T> Iterator<T>::operator+(int add) {
     Iterator<T> temp(pointer + add);
     return temp;
 }
-
 template<class T>
 Iterator<T> Iterator<T>::operator-(int sub){
     Iterator<T> temp(pointer - sub);

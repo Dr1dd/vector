@@ -1,0 +1,10 @@
+Pavarde     Vardas      ND1  ND2   ND3  ND4  ND5  Egzaminas
+Petraitis    Petras    8    9     10   6    10   9
+Antanaitis  Antanas    7    10    8    5    4    6
+Algimantas  Giraitis   1     5    3    4   7  3
+Zigmantas   Zanipokas  9     10    7   9   8   7
+Jonas       Jonaitis   1   2   3    4    6    6
+Jonas1       Jonaitis2   1   2   3    4    6    6
+Jonas2       Jonaitis3   1   2  3  5   10    5
+Jonas3       Jonaitis4   2   2   3    4    6    6
+Jonas4       Jonaitis5  5   4  3    4    8   6
