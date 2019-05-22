@@ -70,3 +70,22 @@ Kaip matome skiriasi 26 ir 27. Taip yra dėl to, nes mano Vector klasės konstru
 push_back funkcija: 
 
 ![push_back](https://imgur.com/aEfnEkp.png)
+
+## 4. Vector klasės implementavimas ir spartos analizė:
+
+
+[1strat mano vektorius](https://imgur.com/a/u9Jmtr3)
+
+| Bandymas su 100000 studentų ir 1 rūšiavimo strategija: | std::vector konteinerio  laikas: | Mano Vector konteinerio laikas: |
+| ----- | ---- | --- |
+| 1 | 0.966s | 1.5811s |
+| 2 | 1.0003s | 1.499s |
+| 3 | 0.951s | 1.5466s |
+
+| Bandymas su 100000 studentų ir 2 rūšiavimo strategija: | std::vector konteinerio  laikas: | Mano Vector konteinerio laikas: |
+| ----- | ---- | --- |
+| 1 | 0.973s | 1.4083s |
+| 2 | 0.956 s | 1.3747s |
+| 3 | 0.963s | 1.38988s |
+
+[2strat mano vektorius](https://imgur.com/a/jFoh77a)
