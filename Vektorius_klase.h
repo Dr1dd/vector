@@ -56,13 +56,18 @@ long int max_size();
 void shrink_to_fit();
 void assign(int kiek, const T &value);
 void clear();
+const T at(int pos) const;
 
 friend class Iterator<T>;
 typedef class Iterator<T> iterator;
 Iterator<T> end();
 Iterator<T> begin(); 
+Iterator<T> rbegin();
+Iterator<T> rend();
 Iterator<T> end() const;
 Iterator<T> begin() const; 
+Iterator<T> rbegin() const; 
+Iterator<T> rend() const; 
 
 Iterator<T> erase(Iterator<T> pos);
 Iterator<T> erase(Iterator<T> first, Iterator<T> last);
@@ -219,6 +224,18 @@ Iterator<T> Vector<T>::begin() const{
 }
 
 template<class T>
+Iterator<T> Vector<T>::rbegin() const{
+    Iterator<T> temp(elem+sz-1);
+    return temp;
+}
+
+template<class T>
+Iterator<T> Vector<T>::rend() const{
+    Iterator<T> temp(elem-1);
+    return temp;
+}
+
+template<class T>
 Iterator<T> Vector<T>::end() {
     Iterator<T> temp(elem+sz);
     return temp;
@@ -230,6 +247,17 @@ Iterator<T> Vector<T>::begin() {
     return temp;
 }
 
+template<class T>
+Iterator<T> Vector<T>::rbegin(){
+    Iterator<T> temp(elem+sz-1);
+    return temp;
+}
+
+template<class T>
+Iterator<T> Vector<T>::rend(){
+    Iterator<T> temp(elem-1);
+    return temp;
+}
 template<class T>
 void Vector<T>::resize(int kiek) {
     if (kiek < 0)
@@ -329,7 +357,16 @@ void Vector<T>::pop_back() {
 }
 template<class T>
 void Vector<T>::reserve(int kiek){
-	resize(kiek);
+	if(kiek > max_size()){
+		T* temp = new T[kiek];
+		for(int i = 0; i < kiek; i++){
+			temp[i] = elem[i];
+		}
+		delete [] elem;
+		elem = temp;
+		cap = kiek;
+		
+	}
 }
 template<class T>
 long int Vector<T>::max_size(){
@@ -429,6 +466,13 @@ void Vector<T>::clear(){
  sz =0;
  cap = 2;
  elem = new T[cap];
+}
+
+template<class T>
+const T Vector<T>::at(int pos) const{
+   if(!(pos<sz)) 
+		throw std::out_of_range("out of range");
+  else return *(elem+pos);
 }
 
 
