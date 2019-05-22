@@ -359,7 +359,7 @@ template<class T>
 void Vector<T>::reserve(int kiek){
 	if(kiek > max_size()){
 		T* temp = new T[kiek];
-		for(int i = 0; i < kiek; i++){
+		for(int i = 0; i < sz; i++){
 			temp[i] = elem[i];
 		}
 		delete [] elem;
