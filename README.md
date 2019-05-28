@@ -52,7 +52,7 @@ Jeigu vektoriaus dydis yra 0 - išmetamas `exception'as`.
 | 10000 | 0s | 0s |
 | 100000 | 0s | 0s |
 | 1000000 | 0s | 0s |
-| 10000000 | 0.0937279s | 0.0937279s |
+| 10000000 | 0.0937279s | 0.062479s |
 | 100000000 | 0.74462s | 0.57277s |
 
 [testai](https://imgur.com/a/gdD4NqI)
