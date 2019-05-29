@@ -52,7 +52,7 @@ void push_back(T & v);
 const Vector push_back(T const& v);
 void pop_back();
 void reserve(int kiek);
-long int max_size();
+size_t max_size() const;
 void shrink_to_fit();
 void assign(int kiek, const T &value);
 void clear();
@@ -106,6 +106,7 @@ Vector<T>::Vector(const Vector<T> &v) : sz(v.sz), cap(v.cap) {
 
 template<class T>
 Vector<T>::Vector(Vector<T> &&v) : sz(v.sz), cap(v.cap) {
+//	std::cout << "move" << std::endl;
     elem = v.elem;
     v.elem = nullptr;
     v.sz = 0;
@@ -134,6 +135,7 @@ Vector<T>& Vector<T>::operator=(Vector&& v) {
     copy.swap(*this);
     return *this;
  }
+ 
 template<class T>
 bool Vector<T>::operator==(const Vector<T> &v) const {
     if (sz == v.sz && cap == v.cap) {
@@ -357,7 +359,7 @@ void Vector<T>::pop_back() {
 }
 template<class T>
 void Vector<T>::reserve(int kiek){
-	if(kiek > max_size()){
+	if(kiek > cap){
 		T* temp = new T[kiek];
 		for(int i = 0; i < sz; i++){
 			temp[i] = elem[i];
@@ -367,10 +369,15 @@ void Vector<T>::reserve(int kiek){
 		cap = kiek;
 		
 	}
+	if(kiek > max_size()) throw std::out_of_range("JEff");
+	
+	
+	
 }
-template<class T>
-long int Vector<T>::max_size(){
-	return 9223372036854775807;
+
+template <class T>
+size_t Vector<T>::max_size() const {
+    return std::numeric_limits<size_t>::max();
 }
 
 template<class T>
