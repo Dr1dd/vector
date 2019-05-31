@@ -369,7 +369,7 @@ void Vector<T>::reserve(int kiek){
 		cap = kiek;
 		
 	}
-	if(kiek > max_size()) throw std::out_of_range("JEff");
+	if(kiek > max_size()) throw std::out_of_range("Your input is greater than max_size");
 	
 	
 	
